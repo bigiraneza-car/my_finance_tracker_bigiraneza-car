@@ -123,11 +123,17 @@
     <!--THE RECORD PAGE-->
     <section id="record">
         <h2>Records</h2>
-        <div id="searchBox">
-            <label for="searchBox">Search Item</label>
-        <input type="text" id="searchBox" name="searchBox" placeholder="regex pattern only">
-
+        <div class="field">
+            <label for="search">Search Item</label>
+            <input type="text" id="search" name="search" p autocomplete="off" placeholder="e.g bus|coffee " aria-describedby="search-error">
+            <p id="search-error"></p>
         </div>
+
+        <div class="case">
+            <label for="case-insensitive">Ignore case</label>
+            <input id="case-insensitive" type="checkbox" checked>
+        </div>
+
         
     </section>
 
