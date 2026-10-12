@@ -169,6 +169,20 @@
 
     <!--THE EDIT PAGE-->
     <section id="edit">
+        <h2>Let's fill the expenses</h2>
+        <div id="add-form">
+            <form novalidate>
+                <label for="item">Description/Item</label>
+                <input type="text" id="item" name="item" placeholder="e.g book" required>
+                <label for="amount">Amount</label>
+                <input type="text" inputmode="decimal" placehoder="10000, 4550" required>
+                <label for="category">Category</label>
+                <select id="category">
+                    <option value="food">Food</option>
+                    <option value="transport">Transport</option>
+                </select>
+            </form>
+        </div>
 
     </section>
 
