@@ -13,7 +13,7 @@
     <section id="about">
         <div id="navigation_bar">
             <!-- placeholder for the logo -->
-            <img src="Logo.png">
+            <img src="images/Logo.png">
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
@@ -26,7 +26,14 @@
         </div>
         <div class="body">
             <p>Welcome to <strong>AOuii</strong>! Your personal pocket financial assistant. Together with AOuii you will be able to track your expenses with a simple click.</p>
+            <img src="images/aouii-about-coin-realistic.png" alt="coin">
+            <br>
+        </div>
+
+        <div>
             <p> <strong>AOuii</strong> is a tool build by a student for students. It helps you record what you spend, group it by category, search for your record with patterns, and stay within the budget limit you set.</p>
+            <img src="images/aouii-about-chart-bif.png" alt="chartexample">
+            <br>
         </div>
 
         <div id="footer">
@@ -39,31 +46,90 @@
     </section>
     <!--THE DASHBOARD/stats PAGE-->
     <section id="dashboard">
-        <h2>Weekly spending report</h2>
+        <h2>Spending report</h2>
         <div id="stats">
-            <div id="total">
-                <p>Weekly spending:</p>
-                <dl>
-
-                </dl>
-            </div>
+            <table>
+                <caption>Spending summary</caption>
+                <thead>
+                    <tr><th colspan="2">Snapshot</th></tr>
+                    <tr><th scope="col">Statistics</th><th scope="col">Value</th></tr>
+                </thead>
+                <tbody>
+                    <tr><th scope="row">Total Records</th><td id="total-records">0</td></tr>
+                    <tr><th scope="row">Total Spent</th><td id="total-spent">0BIF</td></tr>
+                    <tr><th scope="row">Top Category</th><td id="top-category">No data yet</td></tr>
+                </tbody>
+            </table>
 
         </div>
 
-        <div id="">
+        <div id="cap">
+            <h3>Your weekly Cap</h3>
+            <label for="limit">Enter your weekly budget limit:</label>
+            <input id="limit" type="number" name="limit" placeholder="Amount in BIF" required>
 
+        </div>
+
+        <div id="chart">
+            <h3>Your weekly trend chart</h3>
+            <div id="graph">
+                <div id="bar1" data-value="no-data-yet">
+                    <span id="mon">Mon</span>
+                    <span id="value1">none</span>
+
+                </div>
+
+                <div id="bar2" data-value="no-data-yet">
+                    <span id="tue">Tue</span>
+                    <span id="value2">none</span>
+                </div>
+
+                <div id="bar3" data-value="no-data-yet">
+                    <span id="wed">Wed</span>
+                    <span id="value3">none</span>
+                </div>
+
+                <div id="bar4" data-value="no-data-yet">
+                    <span id="thu">Thu</span>
+                    <span id="value4">none</span>
+                </div>
+
+                <div id="bar5" data-value="no-data-yet">
+                    <span id="fri">Fri</span>
+                    <span id="value5">none</span>
+                </div>
+
+                <div id="bar6" data-value="no-data-yet">
+                    <span id="sat">Sat</span>
+                    <span id="value6">none</span>
+                </div>
+
+                <div id="bar7" data-value="no-data-yet">
+                    <span id="sun">Sun</span>
+                    <span id="value7">none</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="summary">
+            <h3>Chart Summary</h3>
+            <p>This day is the day with highest spending</p>
         </div>
 
 
     </section>
+
     <!--THE RECORD PAGE-->
     <section id="record">
-
+        
     </section>
+
     <!--THE EDIT PAGE-->
     <section id="edit">
 
     </section>
+
     <!--SETTINGS PAGE-->
     <section id="settings">
 
