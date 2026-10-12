@@ -66,8 +66,9 @@
         <div id="cap">
             <h3>Your weekly Cap</h3>
             <label for="limit">Enter your weekly budget limit:</label>
-            <input id="limit" type="number" name="limit" placeholder="Amount in BIF" required>
-
+            <input id="limit" type="number" name="limit" placeholder="Amount in BIF">
+            <p id="cap-status" role="status" aria-live="polite"></p>
+            <p id="cap-alert" role="alert" aria-live="assertive"></p>
         </div>
 
         <div id="chart">
@@ -117,7 +118,6 @@
             <p>This day is the day with highest spending</p>
         </div>
 
-
     </section>
 
     <!--THE RECORD PAGE-->
@@ -149,8 +149,22 @@
             </div>
         </div>
         
-
+        <p id="record-status" role="status" aria-live="polite"></p>
+        <table id="records-table">
+            <caption>Your spending records</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount (BIF)</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="records-body"></tbody>
+        </table>
         
+        <p id="empty-state" hidden> No records to show yet. Add one in the <a href="#edit">Edit</a> section.</p>
     </section>
 
     <!--THE EDIT PAGE-->
