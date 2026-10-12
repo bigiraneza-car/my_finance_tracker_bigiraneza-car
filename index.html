@@ -123,16 +123,32 @@
     <!--THE RECORD PAGE-->
     <section id="record">
         <h2>Records</h2>
-        <div class="field">
-            <label for="search">Search Item</label>
-            <input type="text" id="search" name="search" p autocomplete="off" placeholder="e.g bus|coffee " aria-describedby="search-error">
-            <p id="search-error"></p>
-        </div>
 
-        <div class="case">
-            <label for="case-insensitive">Ignore case</label>
-            <input id="case-insensitive" type="checkbox" checked>
+        <div id="toolbar">
+            <div class="field">
+                <label for="search">Search Item</label>
+                <input type="text" id="search" name="search" p autocomplete="off" placeholder="e.g bus|coffee " aria-describedby="search-error">
+                <p id="search-error"></p>
+            </div>
+
+            <div class="case">
+                <label for="case-insensitive">Ignore case</label>
+                <input id="case-insensitive" type="checkbox" checked>
+            </div>
+
+            <div id="sorting">
+                <label for="sort">Sort by</label>
+                <select id="sort">
+                    <option value="date-desc">Date (newest first)</option>
+                    <option value="date-asc">Date (oldest first)</option>
+                    <option value="description-asc">Description (A-Z)</option>
+                    <option value="description-desc">Description (Z-A)</option>
+                    <option value="amount-asc">Amount (low to high)</option>
+                    <option value="amount-desc">Amount (high to low)</option>
+                </select>
+            </div>
         </div>
+        
 
         
     </section>
