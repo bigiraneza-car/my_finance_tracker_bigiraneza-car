@@ -234,16 +234,20 @@
         </div>
         
         <!-- Export/import box -->
-        <div id="importexport">
-            <!-- export -->
+        <div id="import-export">
             <h3>Import and export</h3>
-            <button type="button">Export data as JSON</button>
+            <div class="export">
+                <!-- Export -->
+                <button id="export-button" type="button">Export data as JSON</button>
+            </div>
             <!-- import -->
-            <label for="import-file">Choose a file to import</label>
-            <input id="import-file" type="file" accept=".json" aria-describedby="import-error import-status">
-            <p id="import-status" role="status"></p>
-            <p id="import-error" role="alert"></p>
-            <button id="import" type="button">Import</button>
+            <div class="import">
+                <label for="import-file">Import a JSON file</label>
+                <input id="import-file" type="file" accept=".json" aria-describedby="import-error">
+                <p id="import-error" role="alert"></p>
+                <button id="import=button" type="button">Import</button>
+                <p id="import-status" role="status"></p>
+            </div>
         </div>
 
     </section>
