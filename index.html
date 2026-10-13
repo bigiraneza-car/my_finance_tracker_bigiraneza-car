@@ -7,12 +7,8 @@
 </head>
 <body>
     <header>
-        <h1> <span>AOuii</span> Pocket Assistant</h1>
-    </header>
-    <!-- THE ABOUT PAGE-->
-    <section id="about">
         <div id="navigation_bar">
-            <!-- placeholder for the logo -->
+         <!-- placeholder for the logo -->
             <img src="images/Logo.png">
             <nav>
                 <ul>
@@ -24,233 +20,241 @@
                 </ul>
             </nav>
         </div>
-        <div class="body">
-            <p>Welcome to <strong>AOuii</strong>! Your personal pocket financial assistant. Together with AOuii you will be able to track your expenses with a simple click.</p>
-            <img src="images/aouii-about-coin-realistic.png" alt="coin">
-            <br>
-        </div>
+        <h1> <span>AOuii</span> Pocket Assistant</h1>
+    </header>
 
-        <div>
-            <p> <strong>AOuii</strong> is a tool build by a student for students. It helps you record what you spend, group it by category, search for your record with patterns, and stay within the budget limit you set.</p>
-            <img src="images/aouii-about-chart-bif.png" alt="chartexample">
-            <br>
-        </div>
+    <main>
+        <!-- THE ABOUT PAGE-->
+        <section id="about">
+            
+            <div class="body">
+                <p>Welcome to <strong>AOuii</strong>! Your personal pocket financial assistant. Together with AOuii you will be able to track your expenses with a simple click.</p>
+                <img src="images/aouii-about-coin-realistic.png" alt="coin">
+                <br>
+            </div>
 
-        <div id="footer">
-            <p>For more information or inquiries contact:</p>
-            <a href="https://github.com/bigiraneza-car">Github: bigiraneza-car</a> <br>
-            <a href="mailto:b.igiraneza@alustudent.com">b.igiraneza@alustudent.com</a>
-        </div>
-        
+            <div>
+                <p> <strong>AOuii</strong> is a tool build by a student for students. It helps you record what you spend, group it by category, search for your record with patterns, and stay within the budget limit you set.</p>
+                <img src="images/aouii-about-chart-bif.png" alt="chartexample">
+                <br>
+            </div>
 
-    </section>
-    <!--THE DASHBOARD/stats PAGE-->
-    <section id="dashboard">
-        <h2>Spending report</h2>
-        <div id="stats">
-            <table>
-                <caption>Spending summary</caption>
+            <div id="footer">
+                <p>For more information or inquiries contact:</p>
+                <a href="https://github.com/bigiraneza-car">Github: bigiraneza-car</a> <br>
+                <a href="mailto:b.igiraneza@alustudent.com">b.igiraneza@alustudent.com</a>
+            </div>
+            
+
+        </section>
+        <!--THE DASHBOARD/stats PAGE-->
+        <section id="dashboard">
+            <h2>Spending report</h2>
+            <div id="stats">
+                <table>
+                    <caption>Spending summary</caption>
+                    <thead>
+                        <tr><th colspan="2">Snapshot</th></tr>
+                        <tr><th scope="col">Statistics</th><th scope="col">Value</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">Total Records</th><td id="total-records">0</td></tr>
+                        <tr><th scope="row">Total Spent</th><td id="total-spent">0BIF</td></tr>
+                        <tr><th scope="row">Top Category</th><td id="top-category">No data yet</td></tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div id="cap">
+                <h3>Your weekly Cap</h3>
+                <label for="limit">Enter your weekly budget limit:</label>
+                <input id="limit" type="number" name="limit" placeholder="Amount in BIF">
+                <p id="cap-status" role="status" aria-live="polite"></p>
+                <p id="cap-alert" role="alert" aria-live="assertive"></p>
+            </div>
+
+            <div id="chart">
+                <h3>Your weekly trend chart</h3>
+                <div id="graph">
+                    <div id="bar1" data-value="no-data-yet">
+                        <span id="mon">Mon</span>
+                        <span id="value1">none</span>
+
+                    </div>
+
+                    <div id="bar2" data-value="no-data-yet">
+                        <span id="tue">Tue</span>
+                        <span id="value2">none</span>
+                    </div>
+
+                    <div id="bar3" data-value="no-data-yet">
+                        <span id="wed">Wed</span>
+                        <span id="value3">none</span>
+                    </div>
+
+                    <div id="bar4" data-value="no-data-yet">
+                        <span id="thu">Thu</span>
+                        <span id="value4">none</span>
+                    </div>
+
+                    <div id="bar5" data-value="no-data-yet">
+                        <span id="fri">Fri</span>
+                        <span id="value5">none</span>
+                    </div>
+
+                    <div id="bar6" data-value="no-data-yet">
+                        <span id="sat">Sat</span>
+                        <span id="value6">none</span>
+                    </div>
+
+                    <div id="bar7" data-value="no-data-yet">
+                        <span id="sun">Sun</span>
+                        <span id="value7">none</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="summary">
+                <h3>Chart Summary</h3>
+                <p>This day is the day with highest spending</p>
+            </div>
+
+        </section>
+
+        <!--THE RECORD PAGE-->
+        <section id="record">
+            <h2>Records</h2>
+
+            <div id="toolbar">
+                <div class="field">
+                    <label for="search">Search Item</label>
+                    <input type="text" id="search" name="search" p autocomplete="off" placeholder="e.g bus|coffee " aria-describedby="search-error">
+                    <p id="search-error"></p>
+                </div>
+
+                <div class="case">
+                    <label for="case-insensitive">Ignore case</label>
+                    <input id="case-insensitive" type="checkbox" checked>
+                </div>
+
+                <div id="sorting">
+                    <label for="sort">Sort by</label>
+                    <select id="sort">
+                        <option value="date-desc">Date (newest first)</option>
+                        <option value="date-asc">Date (oldest first)</option>
+                        <option value="description-asc">Description (A-Z)</option>
+                        <option value="description-desc">Description (Z-A)</option>
+                        <option value="amount-asc">Amount (low to high)</option>
+                        <option value="amount-desc">Amount (high to low)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <p id="record-status" role="status" aria-live="polite"></p>
+            <table id="records-table">
+                <caption>Your spending records</caption>
                 <thead>
-                    <tr><th colspan="2">Snapshot</th></tr>
-                    <tr><th scope="col">Statistics</th><th scope="col">Value</th></tr>
+                    <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col">Amount (BIF)</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr><th scope="row">Total Records</th><td id="total-records">0</td></tr>
-                    <tr><th scope="row">Total Spent</th><td id="total-spent">0BIF</td></tr>
-                    <tr><th scope="row">Top Category</th><td id="top-category">No data yet</td></tr>
-                </tbody>
+                <tbody id="records-body"></tbody>
             </table>
+            
+            <p id="empty-state" hidden> No records to show yet. Add one in the <a href="#edit">Edit</a> section.</p>
+        </section>
 
-        </div>
-
-        <div id="cap">
-            <h3>Your weekly Cap</h3>
-            <label for="limit">Enter your weekly budget limit:</label>
-            <input id="limit" type="number" name="limit" placeholder="Amount in BIF">
-            <p id="cap-status" role="status" aria-live="polite"></p>
-            <p id="cap-alert" role="alert" aria-live="assertive"></p>
-        </div>
-
-        <div id="chart">
-            <h3>Your weekly trend chart</h3>
-            <div id="graph">
-                <div id="bar1" data-value="no-data-yet">
-                    <span id="mon">Mon</span>
-                    <span id="value1">none</span>
-
-                </div>
-
-                <div id="bar2" data-value="no-data-yet">
-                    <span id="tue">Tue</span>
-                    <span id="value2">none</span>
-                </div>
-
-                <div id="bar3" data-value="no-data-yet">
-                    <span id="wed">Wed</span>
-                    <span id="value3">none</span>
-                </div>
-
-                <div id="bar4" data-value="no-data-yet">
-                    <span id="thu">Thu</span>
-                    <span id="value4">none</span>
-                </div>
-
-                <div id="bar5" data-value="no-data-yet">
-                    <span id="fri">Fri</span>
-                    <span id="value5">none</span>
-                </div>
-
-                <div id="bar6" data-value="no-data-yet">
-                    <span id="sat">Sat</span>
-                    <span id="value6">none</span>
-                </div>
-
-                <div id="bar7" data-value="no-data-yet">
-                    <span id="sun">Sun</span>
-                    <span id="value7">none</span>
-                </div>
-
-            </div>
-        </div>
-
-        <div id="summary">
-            <h3>Chart Summary</h3>
-            <p>This day is the day with highest spending</p>
-        </div>
-
-    </section>
-
-    <!--THE RECORD PAGE-->
-    <section id="record">
-        <h2>Records</h2>
-
-        <div id="toolbar">
-            <div class="field">
-                <label for="search">Search Item</label>
-                <input type="text" id="search" name="search" p autocomplete="off" placeholder="e.g bus|coffee " aria-describedby="search-error">
-                <p id="search-error"></p>
+        <!--THE EDIT PAGE-->
+        <section id="edit">
+            <h2>Let's fill the expenses</h2>
+            <div id="add-form">
+                <form novalidate>
+                    <label for="item">Description/Item</label>
+                    <input type="text" id="item" name="item" placeholder="e.g book" required><br>
+                    <label for="amount">Amount</label>
+                    <input type="text" inputmode="decimal" placehoder="10000, 4550" required><br>
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="food">Food</option>
+                        <option value="transport">Transport</option><br>
+                        <option value="entertainment">Entertainment</option><br>
+                        <option value="book">Books</option><br>
+                        <option value="others">Others</option><br>
+                    </select>
+                </form>
             </div>
 
-            <div class="case">
-                <label for="case-insensitive">Ignore case</label>
-                <input id="case-insensitive" type="checkbox" checked>
-            </div>
+        </section>
 
-            <div id="sorting">
-                <label for="sort">Sort by</label>
-                <select id="sort">
-                    <option value="date-desc">Date (newest first)</option>
-                    <option value="date-asc">Date (oldest first)</option>
-                    <option value="description-asc">Description (A-Z)</option>
-                    <option value="description-desc">Description (Z-A)</option>
-                    <option value="amount-asc">Amount (low to high)</option>
-                    <option value="amount-desc">Amount (high to low)</option>
-                </select>
-            </div>
-        </div>
-        
-        <p id="record-status" role="status" aria-live="polite"></p>
-        <table id="records-table">
-            <caption>Your spending records</caption>
-            <thead>
-                <tr>
-                    <th scope="col">Description</th>
-                    <th scope="col">Amount (BIF)</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody id="records-body"></tbody>
-        </table>
-        
-        <p id="empty-state" hidden> No records to show yet. Add one in the <a href="#edit">Edit</a> section.</p>
-    </section>
-
-    <!--THE EDIT PAGE-->
-    <section id="edit">
-        <h2>Let's fill the expenses</h2>
-        <div id="add-form">
+        <!--SETTINGS PAGE-->
+        <section id="settings">
+            <h2>Settings</h2>
+            <h3>Currency</h3>
             <form novalidate>
-                <label for="item">Description/Item</label>
-                <input type="text" id="item" name="item" placeholder="e.g book" required><br>
-                <label for="amount">Amount</label>
-                <input type="text" inputmode="decimal" placehoder="10000, 4550" required><br>
-                <label for="category">Category</label>
-                <select id="category">
-                    <option value="food">Food</option>
-                    <option value="transport">Transport</option><br>
-                    <option value="entertainment">Entertainment</option><br>
-                    <option value="book">Books</option><br>
-                    <option value="others">Others</option><br>
-                </select>
+                <p>The base currency is Burundian franc (BIF)</p>
+                <fieldset>
+                    <legend>Exchange rates</legend>
+
+                    <label for="rwf">Rwadan franc (RWF)</label>
+                    <input id="rwf" type="text" name="rwf" inputmode="decimal" aria-describedby="rwf-hint" placeholder="3.9">
+                    <p id="rwf-hint">How many BIF equal 1 RWF?</p>
+
+                    <label for="kes">Kenyan shilling(KES)</label>
+                    <input id="kes" type="text" name="kes" inputmode="decimal" aria-describedby="kes-hint" placeholder="10"> 
+                    <p id="kes-hint">How many BIF equal 1 KES?</p>
+
+                </fieldset>
+
+                <button type="submit">Save settings</button>
+                <p id="settings-status" role="status"></p>
             </form>
-        </div>
-
-    </section>
-
-    <!--SETTINGS PAGE-->
-    <section id="settings">
-        <h2>Settings</h2>
-        <h3>Currency</h3>
-        <form novalidate>
-            <p>The base currency is Burundian franc (BIF)</p>
-            <fieldset>
-                <legend>Exchange rates</legend>
-
-                <label for="rwf">Rwadan franc (RWF)</label>
-                <input id="rwf" type="text" name="rwf" inputmode="decimal" aria-describedby="rwf-hint" placeholder="3.9">
-                <p id="rwf-hint">How many BIF equal 1 RWF?</p>
-
-                <label for="kes">Kenyan shilling(KES)</label>
-                <input id="kes" type="text" name="kes" inputmode="decimal" aria-describedby="kes-hint" placeholder="10"> 
-                <p id="kes-hint">How many BIF equal 1 KES?</p>
-
-            </fieldset>
-
-            <button type="submit">Save settings</button>
-            <p id="settings-status" role="status"></p>
-        </form>
-        <!-- category editor -->
-        <div id="editor">
-            <h3>Category editor</h3>
-            <p>List of current categories:</p>
-            <ul id="category-list">
-                <li>Food</li>
-                <li>Transport</li>
-                <li>Books</li>
-                <li>Entertainment</li>
-                <li>Fees</li>
-                <li>Other</li>
-            </ul>
-            <form novalidate>
-                <label for="new-category">New category</label>
-                <input id="new-category" type="text" name="new-category" aria-describedby="new-category-hint new-category-error">
-                <p id="new-category-hint">use letters, spaces or hyphens only</p>
-                <p id="new-category-error"></p>
-                <button type="submit">Add category</button>
-                <p id="new-category-status" role="status"></p>
-            </form>   
-        </div>
-        
-        <!-- Export/import box -->
-        <div id="import-export">
-            <h3>Import and export</h3>
-            <div class="export">
-                <!-- Export -->
-                <button id="export-button" type="button">Export data as JSON</button>
+            <!-- category editor -->
+            <div id="editor">
+                <h3>Category editor</h3>
+                <p>List of current categories:</p>
+                <ul id="category-list">
+                    <li>Food</li>
+                    <li>Transport</li>
+                    <li>Books</li>
+                    <li>Entertainment</li>
+                    <li>Fees</li>
+                    <li>Other</li>
+                </ul>
+                <form novalidate>
+                    <label for="new-category">New category</label>
+                    <input id="new-category" type="text" name="new-category" aria-describedby="new-category-hint new-category-error">
+                    <p id="new-category-hint">use letters, spaces or hyphens only</p>
+                    <p id="new-category-error"></p>
+                    <button type="submit">Add category</button>
+                    <p id="new-category-status" role="status"></p>
+                </form>   
             </div>
-            <!-- import -->
-            <div class="import">
-                <label for="import-file">Import a JSON file</label>
-                <input id="import-file" type="file" accept=".json" aria-describedby="import-error">
-                <p id="import-error" role="alert"></p>
-                <button id="import=button" type="button">Import</button>
-                <p id="import-status" role="status"></p>
+            
+            <!-- Export/import box -->
+            <div id="import-export">
+                <h3>Import and export</h3>
+                <div class="export">
+                    <!-- Export -->
+                    <button id="export-button" type="button">Export data as JSON</button>
+                </div>
+                <!-- import -->
+                <div class="import">
+                    <label for="import-file">Import a JSON file</label>
+                    <input id="import-file" type="file" accept=".json" aria-describedby="import-error">
+                    <p id="import-error" role="alert"></p>
+                    <button id="import=button" type="button">Import</button>
+                    <p id="import-status" role="status"></p>
+                </div>
             </div>
-        </div>
 
-    </section>
+        </section>
+    </main>
 
     <footer>
         <p>@2026 Becky-Carmine Igiraneza</p>
