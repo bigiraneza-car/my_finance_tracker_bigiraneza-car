@@ -6,26 +6,29 @@
     <title>My Finance Tracker</title>
 </head>
 <body>
+    <a href="#main-content">Skip to main content</a>
     <header>
         <div id="navigation_bar">
          <!-- placeholder for the logo -->
-            <img src="images/Logo.png">
+            <img src="images/Logo.png" alt="logo">
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#dashboard">Dashboard</a></li>
                     <li><a href="#record">Record</a></li>
                     <li><a href="#edit">Edit</a></li>
-                    <li><a href="settings">Settings</a></li>
+                    <li><a href="#settings">Settings</a></li>
                 </ul>
             </nav>
         </div>
         <h1> <span>AOuii</span> Pocket Assistant</h1>
     </header>
 
-    <main>
+    <main id="main-content">
+        
         <!-- THE ABOUT PAGE-->
         <section id="about">
+            <h2>All about AOuii</h2>
             
             <div class="body">
                 <p>Welcome to <strong>AOuii</strong>! Your personal pocket financial assistant. Together with AOuii you will be able to track your expenses with a simple click.</p>
@@ -34,12 +37,12 @@
             </div>
 
             <div>
-                <p> <strong>AOuii</strong> is a tool build by a student for students. It helps you record what you spend, group it by category, search for your record with patterns, and stay within the budget limit you set.</p>
+                <p> <strong>AOuii</strong> is a tool built by a student for students. It helps you record what you spend, group it by category, search for your record with patterns, and stay within the budget limit you set.</p>
                 <img src="images/aouii-about-chart-bif.png" alt="chartexample">
                 <br>
             </div>
 
-            <div id="footer">
+            <div id="contact">
                 <p>For more information or inquiries contact:</p>
                 <a href="https://github.com/bigiraneza-car">Github: bigiraneza-car</a> <br>
                 <a href="mailto:b.igiraneza@alustudent.com">b.igiraneza@alustudent.com</a>
@@ -130,7 +133,7 @@
             <div id="toolbar">
                 <div class="field">
                     <label for="search">Search Item</label>
-                    <input type="text" id="search" name="search" p autocomplete="off" placeholder="e.g bus|coffee " aria-describedby="search-error">
+                    <input type="text" id="search" name="search" autocomplete="off" placeholder="e.g bus|coffee " aria-describedby="search-error">
                     <p id="search-error"></p>
                 </div>
 
@@ -177,16 +180,21 @@
                 <form novalidate>
                     <label for="item">Description/Item</label>
                     <input type="text" id="item" name="item" placeholder="e.g book" required><br>
-                    <label for="amount">Amount</label>
-                    <input type="text" inputmode="decimal" placehoder="10000, 4550" required><br>
+                    
+                    <label for="amount">Amount (BIF)</label>
+                    <input id="amount" name="amount" type="text" inputmode="decimal" placeholder="4550" required><br>
                     <label for="category">Category</label>
-                    <select id="category">
+                    <select id="category" name="category">
                         <option value="food">Food</option>
-                        <option value="transport">Transport</option><br>
-                        <option value="entertainment">Entertainment</option><br>
-                        <option value="book">Books</option><br>
-                        <option value="others">Others</option><br>
+                        <option value="transport">Transport</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="books">Books</option>
+                        <option value="fees">Fees</option>
+                        <option value="other">Other</option>
                     </select>
+                    <label for="date">Date</label>
+                    <input id="date" type="date" name="date" required><br>
+                    <button type="submit">Add expense</button>
                 </form>
             </div>
 
@@ -201,7 +209,7 @@
                 <fieldset>
                     <legend>Exchange rates</legend>
 
-                    <label for="rwf">Rwadan franc (RWF)</label>
+                    <label for="rwf">Rwandan franc (RWF)</label>
                     <input id="rwf" type="text" name="rwf" inputmode="decimal" aria-describedby="rwf-hint" placeholder="3.9">
                     <p id="rwf-hint">How many BIF equal 1 RWF?</p>
 
@@ -248,7 +256,7 @@
                     <label for="import-file">Import a JSON file</label>
                     <input id="import-file" type="file" accept=".json" aria-describedby="import-error">
                     <p id="import-error" role="alert"></p>
-                    <button id="import=button" type="button">Import</button>
+                    <button id="import-button" type="button">Import</button>
                     <p id="import-status" role="status"></p>
                 </div>
             </div>
