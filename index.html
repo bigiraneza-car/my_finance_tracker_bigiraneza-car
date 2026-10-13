@@ -173,13 +173,16 @@
         <div id="add-form">
             <form novalidate>
                 <label for="item">Description/Item</label>
-                <input type="text" id="item" name="item" placeholder="e.g book" required>
+                <input type="text" id="item" name="item" placeholder="e.g book" required><br>
                 <label for="amount">Amount</label>
-                <input type="text" inputmode="decimal" placehoder="10000, 4550" required>
+                <input type="text" inputmode="decimal" placehoder="10000, 4550" required><br>
                 <label for="category">Category</label>
                 <select id="category">
                     <option value="food">Food</option>
-                    <option value="transport">Transport</option>
+                    <option value="transport">Transport</option><br>
+                    <option value="entertainment">Entertainment</option><br>
+                    <option value="book">Books</option><br>
+                    <option value="others">Others</option><br>
                 </select>
             </form>
         </div>
@@ -188,6 +191,30 @@
 
     <!--SETTINGS PAGE-->
     <section id="settings">
+        <h2>Settings</h2>
+        <form>
+            <label for="currency"> Base Currency</label>
+            <select id="currency">
+                <option value="bif">Burundian Francs (BIF)</option>
+                <option value="rwf">Rwandan Francs (RWF)</option>
+                <option value="kes">Kenyan Shillings (KES)</option>
+            </select>
+            <fieldset>
+                <legend>Exchange rates</legend>
+
+                <label for="rwf">RWF</label>
+                <input id="rwf" type="text" name="rwf" inputmode="decimal" aria-describedby="rwf-hint">
+                <p id="rwf-hint">How many BIF equals 1 RWF</p>
+
+                <label for="kes">KES</label>
+                <input id="kes" type="text" name="kes" inputmode="decimal" aria-describedly="kes-hint"> 
+                <p id="kes-hint">How many BIF equals 1 KES</p>
+
+                <button type="submit">Submit</button>
+                <p id="setting-status" role="status"></p>
+            </fieldset>
+        </form>
+        
 
     </section>
 
