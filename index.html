@@ -179,12 +179,13 @@
             <div id="add-form">
                 <form novalidate>
                     <label for="item">Description/Item</label>
-                    <input type="text" id="item" name="item" placeholder="e.g book" required><br>
-                    
+                    <input type="text" id="item" name="item" placeholder="e.g book" aria-describedby="item-error" required><br>
+                    <p id="item-error" role="alert"></p>
                     <label for="amount">Amount (BIF)</label>
-                    <input id="amount" name="amount" type="text" inputmode="decimal" placeholder="4550" required><br>
+                    <input id="amount" name="amount" type="text" inputmode="decimal" placeholder="4550" aria-describedby="amount-error" required><br>
+                    <p id="amount-error" role="alert"></p>
                     <label for="category">Category</label>
-                    <select id="category" name="category">
+                    <select id="category" name="category" aria-describedby="category-error">
                         <option value="food">Food</option>
                         <option value="transport">Transport</option>
                         <option value="entertainment">Entertainment</option>
@@ -192,9 +193,12 @@
                         <option value="fees">Fees</option>
                         <option value="other">Other</option>
                     </select>
+                    <p id="category-error" role="alert"></p>
                     <label for="date">Date</label>
-                    <input id="date" type="date" name="date" required><br>
+                    <input id="date" type="date" name="date" aria-describedby="date-error" required><br>
+                    <p id="date-error" role="alert"></p>
                     <button type="submit">Add expense</button>
+                    <p id="edit-status" role="status"></p>
                 </form>
             </div>
 
