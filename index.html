@@ -230,11 +230,21 @@
                 <p id="new-category-error"></p>
                 <button type="submit">Add category</button>
                 <p id="new-category-status" role="status"></p>
-            </form>
-            
+            </form>   
         </div>
         
-
+        <!-- Export/import box -->
+        <div id="importexport">
+            <!-- export -->
+            <h3>Import and export</h3>
+            <button type="button">Export data as JSON</button>
+            <!-- import -->
+            <label for="import-file">Choose a file to import</label>
+            <input id="import-file" type="file" accept=".json" aria-describedby="import-error import-status">
+            <p id="import-status" role="status"></p>
+            <p id="import-error" role="alert"></p>
+            <button id="import" type="button">Import</button>
+        </div>
 
     </section>
 
