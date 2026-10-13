@@ -192,28 +192,27 @@
     <!--SETTINGS PAGE-->
     <section id="settings">
         <h2>Settings</h2>
-        <form>
-            <label for="currency"> Base Currency</label>
-            <select id="currency">
-                <option value="bif">Burundian Francs (BIF)</option>
-                <option value="rwf">Rwandan Francs (RWF)</option>
-                <option value="kes">Kenyan Shillings (KES)</option>
-            </select>
+        <h3>Currency</h3>
+        <form novalidate>
+            <p>The base currency is Burundian franc (BIF)</p>
             <fieldset>
                 <legend>Exchange rates</legend>
 
-                <label for="rwf">RWF</label>
-                <input id="rwf" type="text" name="rwf" inputmode="decimal" aria-describedby="rwf-hint">
-                <p id="rwf-hint">How many BIF equals 1 RWF</p>
+                <label for="rwf">Rwadan franc (RWF)</label>
+                <input id="rwf" type="text" name="rwf" inputmode="decimal" aria-describedby="rwf-hint" placeholder="3.9">
+                <p id="rwf-hint">How many BIF equal 1 RWF?</p>
 
-                <label for="kes">KES</label>
-                <input id="kes" type="text" name="kes" inputmode="decimal" aria-describedly="kes-hint"> 
-                <p id="kes-hint">How many BIF equals 1 KES</p>
+                <label for="kes">Kenyan shilling(KES)</label>
+                <input id="kes" type="text" name="kes" inputmode="decimal" aria-describedby="kes-hint" placeholder="10"> 
+                <p id="kes-hint">How many BIF equal 1 KES?</p>
 
-                <button type="submit">Submit</button>
-                <p id="setting-status" role="status"></p>
             </fieldset>
+
+            <button type="submit">Save settings</button>
+            <p id="settings-status" role="status"></p>
         </form>
+
+        <h3>Category editor</h3>
         
 
     </section>
