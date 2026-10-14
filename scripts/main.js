@@ -56,7 +56,29 @@ function setupForm({ form, fields, statusId, sucessMessage }) {
             return;
         }
 
-        
-    })
+        announce(status1, successMessage);
+        form.reset();
+        document.getElementById(fields[0].id).focus();
+    });
 
 }
+
+//Edit form: descrption, amount, category, date...
+setupForm({
+    form: document.querySelector('#add-form form'),
+    fields: [
+        { id: 'item', validate: validateItem },
+        { id: 'amount', validate: validateAmount},
+        { id:'category', validate:validateCategory},
+        { id: 'date', validate: validateDate},
+    ],
+    statusId: 'edit-status',
+    successMessage: 'Expense saved',
+});
+// settings: new category
+setupForm({
+    form: document.querySelector('#editor form'),
+    fields: [{id: 'new-category', validate: validateCategory }],
+    statusId: 'new-category-status',
+    successMessage: 'category is valid.' 
+})
