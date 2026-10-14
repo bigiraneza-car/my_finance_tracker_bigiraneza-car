@@ -58,4 +58,21 @@ export function validateAmount(value) {
 }
 
 //--date
+export function validateDate(value) {
+    if (value === '')
+        return fail('choose a date');
+    if (!patterns.date.test(value))
+        return fail('Use the format YYYY-MM-DD, for example 2025-09-29.');
 
+    return okay();
+}
+
+// category
+export function validateCategory(value) {
+    if (value=== '')
+        return fail('Enter or choose a category.');
+    if(!patterns.category.test(value)) {
+        return fail('use letters only, with dingle spaces or hyphens between words (for example fast food).');
+    return okay;
+    }
+}
