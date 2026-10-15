@@ -10,9 +10,9 @@ import {
  // error UI helpers 
 function showError(fieldId, message) {
     const input = document.getElementById(fieldId);
-    const error1 = document.getElementById('${fieldId}-error');
-    error1.textcontent = message;
-    if (message) input.setAttribute('arai-invalid', 'true');
+    const error1 = document.getElementById(`${fieldId}-error`);
+    error1.textContent = message;
+    if (message) input.setAttribute('aria-invalid', 'true');
     else input.removeAttribute('aria-invalid');
 }
  
@@ -38,7 +38,7 @@ function setupForm({ form, fields, statusId, sucessMessage }) {
     //for fields that has an error becomes valid, clear its error.
     fields.forEach((field) => {
         document.getElementById(field.id).addEventListener('input', (event) =>{
-            if (event.target.hasAttribut('aria-invalid')) 
+            if (event.target.hasAttribute('aria-invalid')) 
                 checkField(field);
         });
         });
