@@ -3,11 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Validator testing</title>
+    <style>
+        .pass {color:#013f2f; }
+        .fail { color: darkred;}
+    </style>
 </head>
 <body>
     <h1>Validator testing</h1>
-    <p>To test if the validators put in place gvie what is expected. To be opened with live server</p>
-    <script type="module" ></script>
+    <p>To test if the validators put in place give what is expected. To be opened with live server</p>
+
+    <!-- empty container for the test lines -->
+    <div id="results">
+
+    </div>
+    <p role="status" id="summary"></p>
+    <script type="module" >
+        import {
+            validateDescription,
+            validateNoDuplicateWords,
+            validateItem,
+            validateAmount,
+            validateDate,
+            validateCategory,
+        } from './scripts/validator.js';
+        const results = document.getElementById('results');
+        let passed =0;
+        let total =0;
+        // to display cleaner input
+        const show = (text) =>
+        JSON.stringify(text.length > 40 ? `${text.slice(0, 30)}... (${text.length} characters)` : text);
+        // function used to test the validators
+        function group(title, validate, cases) {
+            const heading = document.createElement('h2');
+            heading.textContent = title;
+            const list = document.createElement('ul');
+            for (const [input, expected] of cases) {
+                const actual = validate(input).valid;
+                const good = actual === expected;
+                total++;
+                if (good) passed++;
+                const li =document.createElement('li');
+                li.className = good ? 'pass' : 'fail';
+                li.textContent =
+                `${good ? 'PASS' : 'FAIL'}: ${show(input)} should be ${expected ? 'valid' : 'invalid'}` + (good ? '' : ` (got ${actual ? 'valid' : 'invalid'})`);
+                list.appendChild(li);
+            }
+            results.append(heading, list);
+        }
+        // Example to test
+
+        group('Description (basic rule)', validateDescription, [
+                    ['Lunch at cafeteria', true],
+                    [' Lunch', false],
+                    ['A', true],
+                    ['', false],
+                    [' ', false],
+                    ['bus pass 2', true],
+        ]);
+
+        // description advanced rule
+
+        group('advanced rule description', validateNoDuplicateWords, [
+            ['Lunch at cafeteria', true],
+            ['the Lunch', true],
+            ['', true],
+            ['the the coffee', false], 
+            ['The the bus', false],  //case-insensitive
+            ['bus pass 2', true],
+        ]);
+
+        // description item rule: first check basic rule then advanced ones
+
+        group('description both rule together', validateItem, [
+            ['Lunch at cafeteria', true],
+            [' Lunch', false],
+            ['', false],
+            ['the the coffee', false],
+        ]);
+
+        // amount validation
+        group('amount', validateAmount, [
+            ['0',true],
+            ['4550',true],
+            ['12.5',true],
+            ['12.50', true],
+            ['007',false],     //leading zeros, no trailing dot, no more than two decimals, no trailing space...
+            ['-5',false],
+            ['12.',false],   
+            ['.12',false],
+            [' 12',false],
+            ['',false],
+            ['12.56473',false],
+        ]);
+
+        //date validation
+        group('date', validateDate, [
+            ['2025-12-04', true],
+            ['2023-10-24', true],
+            ['2025-01-14', true],
+            ['2025-13-04', false],  //month 13
+            ['2022-00-40', false],  
+            ['29-10-2024', false],  //wrong order
+            ['2026-12-00', false],
+        ]);
+
+        //category validation
+        group('category', validateCategory, [
+            ['Food', true],
+            ['Fees', true],
+            ['Eating out', true],
+            ['Food1', false],
+            ['cold  Food', false],
+            ['Food ', false],
+            [' Food', false],
+            ['', false],
+        ]);
+
+        //summary of the test
+
+        const summary = document.getElementById('summary');
+        summary.textContent = `${passed} of ${total} passed`;
+        summary.className = passed === total ? 'pass' : 'fail';
+    
+    </script>
 </body>
 </html>
