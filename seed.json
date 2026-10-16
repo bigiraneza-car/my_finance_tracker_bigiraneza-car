@@ -1,0 +1,103 @@
+[
+    {
+        "id": "rec_0001",
+        "description": "Lunch at cafeteria",
+        "amount": 4500,
+        "category": "Food",
+        "date": "2026-10-16",
+        "createdAt": "2026-10-16T09: 00:00.000z",
+        "updatedAt": "2026-10-26T09:00:00.000z"
+    },
+    {
+        "id": "rec_0002",
+        "description": "bus pass (monthly)",
+        "amount": 12000,
+        "category": "Transport",
+        "date": "2026-10-15",
+        "createdAt": "2026-10-15T09:00:00.000z",
+        "updatedAt": "2026-10-15T09:00:00.000z"
+    },
+    {
+        "id": "rec_003",
+        "description": "coffee with friends",
+        "amount": 8750,
+        "category": "Entertainment",
+        "date":"2026-10-13",
+        "createdAt": "2026-10-13T09:00:00.000z",
+        "updatedAt": "2026-10-13T09:00:00.000z"
+    },
+    {
+        "id": "rec_0004",
+        "description": "Tea and bread",
+        "amount": 2300,
+        "category": "Food",
+        "date": "2026-10-12",
+        "createdAt": "2026-10-12T09:00:00.000z",
+        "updatedAt": "2026-10-12T09:00:00.000z"
+    },
+    {
+        "id": "rec_0005",
+        "description": "Exam fee",
+        "amount": 15000,
+        "category": "Fees",
+        "date": "2026-10-10",
+        "createdAt": "2026-10-10T09:00:00.000z",
+        "updatedAt": "2026-10-10T09:00:00.000z"
+    },
+    {
+        "id": "rec_0006",
+        "description": "C++ textbook",
+        "amount": 65000,
+        "category": "Books",
+        "date": "2026-09-30",
+        "createdAt": "2026-09-30T09:00:00.000z",
+        "updatedAt": "2026-09-30T09:00:00.000z"
+    },
+    {
+        "id": "rec_0007",
+        "description": "Notebook and pens",
+        "amount": 3200.5,
+        "category": "Other",
+        "date": "2026-09-01",
+        "createdAt":"2026-09-01T09: 00:00.000z",
+        "updatedAt": "2026-09-01T09: 00:00.000z"
+    },
+    {
+       "id": "rec_0008",
+       "description": "Leap day snack",
+       "amount": 1500,
+       "category": "Food",
+       "date": "2024-02-29",
+       "createdAt": "2024-02-29T09:00:00.000z",
+       "updatedAt": "2024-02-29T09:00:00.000z" 
+    },
+    {
+        "id": "rec_0009",
+        "description": "Year-end gift",
+        "amount": 2500000,
+        "category": "other",
+        "date": "2025-12-31",
+        "createdAt": "2025-12-31T09:00:00.000z",
+        "updatedAt": "2025-12-31T09:00:00.000z"
+
+    },
+    {
+        "id": "rec_0010",
+        "description": "Free sample",
+        "amount":  0,
+        "category": "Other",
+        "date": "2026-01-01",
+        "createdAt": "2026-01-01T09:00:00.000z",
+        "updatedAt": "2026-01-01T09:00:00.000z"
+    },
+    {
+        "id": "rec_0011",
+        "description": "Bus to Kigali (return trip with luggage and extra snacks for the road)",
+        "amount": 52000,
+        "category": "Transport",
+        "date": "2025-06-15",
+        "createAt": "2025-06-15T09:00:00.000z",
+        "updatedAt": "2025-06-15T09:00:00.000z"
+    }
+    
+]
