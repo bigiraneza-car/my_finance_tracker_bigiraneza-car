@@ -16,7 +16,7 @@ function showError(fieldId, message) {
     else input.removeAttribute('aria-invalid');
 }
  
-// show or clears the error and return true/fasle
+// show or clears the error and return true/false
 function checkField({id, validate }) {
     const { valid, message } = validate(document.getElementById(id).value);
     showError(id, valid ? '': message);
@@ -63,7 +63,7 @@ function setupForm({ form, fields, statusId, sucessMessage }) {
 
 }
 
-//Edit form: descrption, amount, category, date...
+//Edit form: description, amount, category, date...
 setupForm({
     form: document.querySelector('#add-form form'),
     fields: [
@@ -80,5 +80,5 @@ setupForm({
     form: document.querySelector('#editor form'),
     fields: [{id: 'new-category', validate: validateCategory }],
     statusId: 'new-category-status',
-    successMessage: 'category is valid.' 
-})
+    successMessage: 'Category is valid.' 
+});
