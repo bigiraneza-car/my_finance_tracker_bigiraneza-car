@@ -6,6 +6,7 @@ import {
     validateCategory,
     validateDate,
 } from './validator.js';
+import { initState, addRecord } from './state.js';
 
  // error UI helpers 
 function showError(fieldId, message) {
@@ -55,13 +56,17 @@ function setupForm({ form, fields, statusId, sucessMessage }) {
             document.getElementById(firstInvalid.id).focus();  //keyboard users land on the problem
             return;
         }
-
+        if (onValid) onValid();  //M4: save the record
         announce(status1, successMessage);
         form.reset();
         document.getElementById(fields[0].id).focus();
     });
 
 }
+
+//start the app: load the save records
+await initState();
+// 
 
 //Edit form: description, amount, category, date...
 setupForm({
@@ -74,6 +79,15 @@ setupForm({
     ],
     statusId: 'edit-status',
     successMessage: 'Expense saved',
+    onValid: () => {
+        //read the four values and hand them to the records variable
+        addRecord({
+            description: document.getElementById('item').value,
+            amount: document.getElementById('amount').value,
+            category: document.getElementById('category').value,
+            date: document.getElementById('date').value,
+        });
+    },
 });
 // settings: new category
 setupForm({
