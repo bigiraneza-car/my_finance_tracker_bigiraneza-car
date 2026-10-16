@@ -6,7 +6,7 @@ import {
     validateCategory,
     validateDate,
 } from './validator.js';
-import { initState, addRecord } from './state.js';
+import { initState, addRecord, getAllRecords } from './state.js';
 
  // error UI helpers 
 function showError(fieldId, message) {
@@ -67,6 +67,7 @@ function setupForm({ form, fields, statusId, successMessage, onValid }) {
 //start the app: load the save records
 await initState();
 // 
+console.log(getAllRecords());
 
 //Edit form: description, amount, category, date...
 setupForm({
