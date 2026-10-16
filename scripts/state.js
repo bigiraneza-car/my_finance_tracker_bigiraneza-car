@@ -12,7 +12,7 @@ const editableFields = ['description', 'amount', 'category', 'date'];
 export async function initState() {
     const stored = load();
 
-    if (stored.length > 0) {
+    if (stored !== null) {
         records = stored;
         return;
     }
@@ -49,10 +49,10 @@ export function addRecord({ description, amount, category, date}) {
     const record = {
         id: makeId(),
         description,
-        amount: number(amount),
+        amount: Number(amount),
         category,
         date,
-        createAt: now,
+        createdAt: now,
         updatedAt: now,
     };
     records.push(record);
@@ -61,7 +61,7 @@ export function addRecord({ description, amount, category, date}) {
 }
 
 //update: change only what was edited, update only updateAt
-export function updateRecord(is, changes) {
+export function updateRecord(id, changes) {
     const record = records.find((r) => r.id === id);
     if (!record)  //no record with that id
         return null;
@@ -73,7 +73,7 @@ export function updateRecord(is, changes) {
         }
     }
 
-    record.updateAt = new Date().toISOString();
+    record.updatedAt = new Date().toISOString();
     save(records);
     return { ...record };
 }

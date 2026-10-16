@@ -13,6 +13,6 @@ export function load() {
         return JSON.parse(text);
 
     } catch {
-        return [];    //catch damaged text to avoid crashing the app
+        return null;    //catch damaged text to avoid crashing the app
     }
 }

@@ -31,7 +31,7 @@ function announce( el, text) {
 
 
 // function reused by every form that needs validation 
-function setupForm({ form, fields, statusId, sucessMessage }) {
+function setupForm({ form, fields, statusId, successMessage, onValid }) {
     if (!form)
         return;
     const status1 = document.getElementById(statusId);
