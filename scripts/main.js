@@ -6,6 +6,7 @@ import {
     validateCategory,
     validateDate,
 } from './validator.js';
+
 import { initState, addRecord, getAllRecords } from './state.js';
 
 import {loadCap, saveCap } from './storage.js';
