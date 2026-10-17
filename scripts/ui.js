@@ -1,8 +1,8 @@
 import { countRecords, totalSpent, topCategory, busiestDay } from "./stats.js";
 
 // formatting
-const formatNumber = (n) => n.toLocaleString('en-US', {maximumFractionDigits: 2});
-//1500000 -> 1.5M
+const formatNumber = (n) => n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+
 export const formatBIF = (n) => `${formatNumber(n)} BIF`;
 //announcements
 const timers = new Map();
@@ -29,19 +29,20 @@ export function renderStats(records, days) {
     renderChart(days);
 
     const best = busiestDay(days);
-    document.querySelector('#summary p').textContent = best ? `Highest spending in the last 7 days: ${best.label} (${best.key}) with  ${formatBIF(best.total)}.`
-    : 'No spending in the last 7 days.';
+    document.querySelector('#summary p').textContent = best ? `Highest spending in the last 7 days: ${best.label} (${best.key}) with ${formatBIF(best.total)}.`
+        : 'No spending in the last 7 days.';
 }
 
 function renderChart(days) {
     const max = Math.max(...days.map((d) => d.total));
+    const chartNumber = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 });
 
     days.forEach((day, i) => {
         const bar = document.getElementById(`bar${i + 1}`);
         bar.querySelector('span').textContent = day.label;  //dayname
 
         document.getElementById(`value${i + 1}`).textContent =
-            day.total > 0 ? Intl.NumberFormat(day.total) : 'none';  //amount
+            day.total > 0 ? chartNumber.format(day.total) : 'none';  //amount
         if (day.total > 0 && max > 0) {
             bar.style.setProperty('--h', `${(day.total / max) * 100}%`); //read buy css
             bar.dataset.value = String(day.total);
@@ -66,10 +67,10 @@ export function renderCapMessage(status, cap, shouldAnnounce = true) {
     } else if (status.state === 'over') {
         assertive = `You are over your weekly cap by ${formatBIF(status.difference)}.`;
     }
-const status1 = document.getElementById('cap-status');
-const alert1 = document.getElementById('cap-alert');
-const show = shouldAnnounce ? announce : setQuietly;
+    const status1 = document.getElementById('cap-status');
+    const alert1 = document.getElementById('cap-alert');
+    const show = shouldAnnounce ? announce : setQuietly;
 
-show(status1, polite);
-show(alert1, assertive);
+    show(status1, polite);
+    show(alert1, assertive);
 }
