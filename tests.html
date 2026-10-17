@@ -27,6 +27,17 @@
             validateDate,
             validateCategory,
         } from './scripts/validator.js';
+        
+        import {
+            NO_DATA,
+            totalSpent,
+            topCategory,
+            lastSevenDays,
+            weeklySpent,
+            capStatus,
+        } from './scripts/stats.js';
+
+
         const results = document.getElementById('results');
         let passed =0;
         let total =0;
@@ -119,6 +130,42 @@
             [' Food', false],
             ['', false],
         ]);
+        
+        //for comparing values (not valid/invalid) M5 stats tests
+        const list = document.createElement('ul');
+        const heading = document.createElement('h2');
+        heading.textContent = 'stats';
+        results.append(heading, list);
+
+        function check(label, actual, expected) {
+            const good = actual === expected;
+            total++;
+            if (good) passed++;
+            const li = document.createElement('li');
+            li.className = good ? 'pass' : 'fail';
+            li.textContent = `${good ? 'PASS' : 'FAIL'}: ${label}` + (good ? '' : `(got ${actual}, expected ${expected})`);
+            list.appendChild(li);
+        }
+
+        const rec = (amount, category, date) => ({amount, category, date });
+        const today = new Date(2026, 9, 16);  //fixed date, so the tests never depend on the real date
+        const week = lastSevenDays([
+            rec(100, 'Food', '2026-10-16'),  //today: counted
+            rec(200, 'Food', '2026-10-10'),  //6 days ago: counted
+            rec(400, 'Food', '2026-10-09'),  //7 days ago: left out
+            rec(800, 'Food', '2026-10-17'),  //future: left out
+        ], today);
+
+        check('empty list: total is 0', totalSpent([]), 0);
+        check('empty list: top category', topCategory([]).name, NO_DATA);
+        check('0.1 + 0.2 is exactly 0.3', totalSpent([rec(0.1, 'Food', 'x'), rec(0.2, 'Food', 'x')]), 0.3);
+        check('top category is by money, not entries', topCategory([rec(10, 'Food', 'x'), rec(10, 'Food', 'x'), rec(100, 'Fees', 'x')]).name, 'Fees');
+        check('last 7 days: 7 buckets', week.length, 7);
+        check('last 7 days: the last bucket is today', week[6].key, '2026-10-16');
+        check('last 7 days: ild and future records are left out', weeklySpent(week), 300);
+        check('cap below spending is over', capStatus(1000, 1200).state, 'over');
+        check('empty cap gives no message', capStatus(null, 100).state, 'none');
+
 
         //summary of the test
 

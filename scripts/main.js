@@ -8,6 +8,10 @@ import {
 } from './validator.js';
 import { initState, addRecord, getAllRecords } from './state.js';
 
+import {loadCap, saveCap } from './storage.js';
+import { lastSevenDays, weeklySpent, capStatus } from './stats.js';
+import { renderStats, renderCapMessage, announce} from './ui.js';
+
  // error UI helpers 
 function showError(fieldId, message) {
     const input = document.getElementById(fieldId);
@@ -24,10 +28,7 @@ function checkField({id, validate }) {
     return valid;
 }
 
-function announce( el, text) {
-    el.textContent = '';
-    setTimeout( () => { el.textContent = text; }, 100);
-}
+
 
 
 // function reused by every form that needs validation 
@@ -66,8 +67,47 @@ function setupForm({ form, fields, statusId, successMessage, onValid }) {
 
 //start the app: load the save records
 await initState();
-// 
-console.log(getAllRecords());
+// the weekly cap: a number
+let cap = loadCap();
+const limitInput = document.getElementById('limit');
+if (cap !== null) limitInput.value = String(cap);
+
+//the function that redraws everythin on the dashboard form the saved list.
+// call it at start, after every add.edit/delete, after an import, and when the cap changes
+
+function refreshAll(shouldAnnounce = true) {
+    const records = getAllRecords();
+    const days = lastSevenDays(records);
+    renderStats(records, days);
+    renderCapMessage(capStatus(cap, weeklySpent(days)), cap, shouldAnnounce);
+    //
+}
+refreshAll(false);
+
+//update the cap when the user leaves the field or presses Enter
+limitInput.addEventListener('change', () => {
+    const text = limitInput.value;
+
+    if ( text === ''){  //empty = no cap
+        showError('limit', '');
+        cap = null;
+        saveCap(null);
+        refreshAll();
+        return;
+    }
+
+    const result = validateAmount(text); //reuse the amount rule
+    if (!result.valid) {
+        showError('limit', result.message); //keep the old cap until the input is valid
+        return;
+    }
+
+    showError('limit', '');
+    cap = Number(text);
+    saveCap(cap);
+    refreshAll();
+});
+
 
 //Edit form: description, amount, category, date...
 setupForm({
@@ -88,6 +128,9 @@ setupForm({
             category: document.getElementById('category').value,
             date: document.getElementById('date').value,
         });
+
+        //dashboard updates after every new expense
+        refreshAll(); 
     },
 });
 // settings: new category

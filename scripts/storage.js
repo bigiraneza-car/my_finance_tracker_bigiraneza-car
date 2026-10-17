@@ -17,3 +17,20 @@ export function load() {
         return null;    //catch damaged text to avoid crashing the app
     }
 }
+
+//cap saved under its own key separate from the records
+const CAP_KEY = 'aouii:cap';
+
+//cap is a number or null
+export function saveCap(cap) {
+    if(cap === null) localStorage.removeItem(CAP_KEY);
+    else localStorage.setItem(CAP_KEY, String(cap));
+}
+
+//return a number or null if there is no cap
+export function loadCap() {
+    const text = localStorage.getItem(CAP_KEY);
+    if ( text === null) return null;
+    const value = Number(text);
+    return Number.isFinite(value) && (value >= 0) ? value : null;
+}
