@@ -8,7 +8,7 @@ form br, img + br {display:none; }
 
 /* color variables*/
 :root {
-    --green: #14392F;
+    --green: #041813;
     --green-hover: #1F5646;
     --caramel: #bfbfbf;
     --caramel-light: #bfa487;
@@ -42,7 +42,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-    outline: 3px solid #14392F;
+    outline: 3px solid var(--green);
     outline-offset:3px;
 }
 header a:focus-visible,
@@ -56,7 +56,7 @@ a[href="#main-content"] {
     z-index: 100;
     padding: 0.75rem 1rem;
     color:#FBF1E1;
-    background:#14392F;
+    background: var(--green);
 }
 a[href="#main-content"]:focus { 
     left:0;
@@ -71,7 +71,7 @@ a[href="#main-content"]:focus {
 /* header and nav */
 header {
     text-align: center;
-    background: #14392f;
+    background: var(--green);
     padding-bottom: 1rem;
 }
 
@@ -103,7 +103,7 @@ nav ul {
     justify-content: center;
     gap: 0.5rem;
     margin: 0;
-    padding: 0.5rem 0;
+    padding: 0rem 0;
     list-style: none;
     
 
