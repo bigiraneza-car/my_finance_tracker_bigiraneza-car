@@ -4,7 +4,7 @@ A personal finance tracker for students, built with plain HTML, CSS and JavaScri
 
 - **Theme:** Student Finance Tracker
 - **Live site (GitHub Pages):** `https://bigiraneza-car.github.io/my_finance_tracker_bigiraneza-car/
-- **Demo video (unlisted):** `TODO: paste your video link here`
+- **Demo video (unlisted):** https://youtu.be/N1CKW8Us-z8
 - **Contact:** [github.com/bigiraneza-car](https://github.com/bigiraneza-car) · b.igiraneza@alustudent.com
 
 ## Features
