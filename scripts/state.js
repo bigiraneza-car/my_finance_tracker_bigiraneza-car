@@ -64,7 +64,8 @@ export function addRecord({ description, amount, category, date}) {
         updatedAt: now,
     });
     save(records);
-    return { ...records};
+    newCopy = { ...records}
+    return newCopy;
 }
 
 //update: change only what was edited, update only updateAt
@@ -125,4 +126,4 @@ export function setRates(newRates) {
     saveRates(rates);
 }
 
-//movfrom stats.js
+

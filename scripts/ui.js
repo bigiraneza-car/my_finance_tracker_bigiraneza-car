@@ -1,4 +1,4 @@
-import { countRecords, totalSpent, topCategory, busiestDay } from "./stats.js";
+import { convertTotal, totalSpent, topCategory, busiestDay } from "./stats.js";
 
 
 // formatting
@@ -12,6 +12,7 @@ export function announce(el, text) {
     clearTimeout(timers.get(el));
     el.textContent = '';
     setTimeout(() => { el.textContent = text; }, 100);
+    timers.set(el, setTimeout);
 }
 
 //sets the text without announcing
@@ -28,7 +29,7 @@ export function renderStats(records, days, rates) {
     document.getElementById('top-category').textContent = topCategory(records).name;
 
     const converted = convertTotal(total, rates).map(({ code, amount }) => `${formatNumber(amount)} ${code}`);
-    document.getElementById('total-converted').textcontent = converted.join(' . ') || 'Set exchange rates in Settings';
+    document.getElementById('total-converted').textContent = converted.join(' . ') || 'Set exchange rates in Settings';
 
     renderChart(days);
 
@@ -76,26 +77,11 @@ export function renderCapMessage(status, cap, shouldAnnounce = true) {
     show(status1, polite);
     show(alert1, assertive);
 }
-function viewRow(r, re) {
-    const name = escapeHTML(r.description);
-    return `<tr data-id = '${escapeHTML(r.id)}">
-     < th scope= "row" data-label ='Description"{highlight(r.description, re)}</th>
-     <td data-label ="Amount">${highlight(formatAmount(r.amount), re)}</td>
-     <td data-label ="Amount">${highlight(r.category, re)}</td>
-     <td data-label ="Amount">${highlight(r.date, re)}</td>
-     <td class="actions">
-         <button type="button" data-action="edit" aria-label="Edit ${name}">Edit</button>
-         <button type="button" data-action="delete" aria-label="Delete ${name}">Delete</button>
-     </td>
-     </tr>`;
-}
 
 
-
-export function renderTable(shown, re, editingId, categories) {
+export function renderTable(shown, categories) {
     document.getElementById('records-body').innerHTML = shown
-        .map((r) =>( r.id === editingId ? editRow(r, categories) : viewRow(r, re)))
-        .join('');
+        
     document.getElementById('records-table').hidden = shown.length === 0;
     document.getElementById('empty-state').hidden = shown.length >0;
 }

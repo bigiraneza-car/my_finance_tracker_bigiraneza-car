@@ -28,7 +28,7 @@ function write(key, value) {
 // This function will load back the saved records  
 export function load() {
     const data = read(KEYS.records, null);
-        return ArrayisArray(data) ? data : null;
+        return Array.isArray(data) ? data : null;
 }
 // change list into text and save it 
 export const  save = (records) => write(KEYS.records, records);
@@ -46,7 +46,7 @@ export const saveCap = (cap) => write(KEYS.cap, cap);
 
 export function loadRates() {
     const data = read(KEYS.rates, null);
-    return {RWF: data?.RWF > 0 ? DEFAULT_CATEGORIES.RWF : null, KES: data?.KES > 0 ? data.KES : null };
+    return {RWF: data?.RWF > 0 ? data.RWF : null, KES: data?.KES > 0 ? data.KES : null };
 }
 
 export const saveRates = (rates) => write(KEYS.rates, rates);

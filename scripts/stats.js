@@ -49,7 +49,7 @@ export function lastSevenDays(lists, today = new Date()) {
         });
     }
 
-    for(const r of list) {
+    for(const r of lists) {
         const day = days.find((d) => d.key === r.date);
         if (day) day.cents += toCents(r.amount);
     }
@@ -74,7 +74,7 @@ export function capStatus(cap, spent) {
     if (cap === null || cap === undefined) return {state: 'none', difference: 0};
 
     const Cents = toCents(cap) - toCents(spent);
-    if (Cents > 0) return {state: 'under', difference: diffCents / 100};
+    if (Cents > 0) return {state: 'under', difference: Cents / 100};
     return Cents === 0 ? {state: 'equal', difference: 0} : {state:'over', difference: -Cents /100 };
 }
 
@@ -84,4 +84,4 @@ export const fromBif = (amountBif, rate) => (rate > 0 ? Math.round(toCents(amoun
 export const convertTotal = (totalBif, rateList) =>
     Object.entries(rateList)
           .filter(([, rate]) => rate > 0)
-          .map(([Code, rate]) => ({code, amount: fromBif(totalBif, rate) }));
+          .map(([code, rate]) => ({code, amount: fromBif(totalBif, rate) }));
