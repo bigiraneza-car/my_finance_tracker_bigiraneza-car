@@ -1,15 +1,26 @@
 import {
     save,
-    load
+    load,
+    loadCategories,
+    saveCategories,
+    loadRates,
+    saveRates
 } from './storage.js';
 
 let records =[];
 
+//categories and exchange rates
+let categories = [];
+let rates = {RWF: null, KES: null };
+
 //only fields a user can edit
 const editableFields = ['description', 'amount', 'category', 'date'];
 
-// init function that runs once the app starts
+// init function that runs once the app starts. It loads categories and rates and check if stored !== null
 export async function initState() {
+    categories = loadCategories();
+    rates = loadRates();
+
     const stored = load();
 
     if (stored !== null) {
@@ -21,20 +32,18 @@ export async function initState() {
     try {
         const response = await fetch('seed.json');
         if (!response.ok) throw new Error(`seed.json returned status ${response.status}`);
-        records = await response.json();
+        const seed = await response.json();
+        records = Array.isArray(seed) ? seed : [];
         save(records);
     } 
     catch (error) {
         console.error('could not load seed.json:', error);
-        records = [];
-    
     }
 } 
 
-// returns a copy
-export function getAllRecords() {
-    return [...records];
-}
+// returns a copy of each record
+export const getAllRecords = () => records.map((r) => ({...r }));
+
 
 //makes id for record with the format rec_0001
 function makeId() {
@@ -46,7 +55,7 @@ function makeId() {
 //add record 
 export function addRecord({ description, amount, category, date}) {
     const now = new Date().toISOString();
-    const record = {
+    records.push({
         id: makeId(),
         description,
         amount: Number(amount),
@@ -54,10 +63,9 @@ export function addRecord({ description, amount, category, date}) {
         date,
         createdAt: now,
         updatedAt: now,
-    };
-    records.push(record);
+    });
     save(records);
-    return { ...record };
+    return { ...records};
 }
 
 //update: change only what was edited, update only updateAt

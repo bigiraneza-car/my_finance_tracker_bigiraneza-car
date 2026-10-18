@@ -58,6 +58,12 @@ export function validateAmount(value) {
 }
 
 //--date
+//pattern to confirm the day exist. For dates 2026-02-30 
+function isDateReal(value) {
+    const [year, month, day] = value.split('-').map(Number);
+    const d = new Date(Date.UTC(year, month -1, day));
+    return d.getUTCFullYear() === year && d.getUTCMonth() === month - 1 && d.getDate() === day;
+}
 export function validateDate(value) {
     if (value === '')
         return fail('Choose a date');
@@ -76,4 +82,63 @@ export function validateCategory(value) {
    
     }
     return okay();
+}
+
+// validate rate
+export function validateRate(value) {
+    if (value === '')
+        return okay();
+    if (!patterns.amount.test(value) || Number(value) <= 0)
+        return fail('Enter a greater than 0, e.g: 3.9 up to 2 decimals.');
+    return okay();
+}
+
+// validateimport checks the parsed file before anything is saved
+const fields = ['id', 'description', 'amount', 'category', 'date', 'createAt', 'updateAt'];
+const rules = { description: validateDescription, amount: validateAmount, category: validateCategory, date:  validateDate};
+
+export function validateImport(data) {
+    if (!Array.isArray(data))
+        return fail('The file must contain a list of records (a JSON array).');
+
+    const ids = new Set();
+    for (const [i, r] of data.entries()) {
+        const where =  `Record ${i + 1}`;
+        if (r === null || typeof r !== 'object')
+            return fail(`${where}: must be an object.`);
+
+        const missing = fields.find((f) => !(f in r));
+        if (missing) 
+            return fail(`${where}: missing the "${missing}" field`);
+
+        if (typeof r.id !== 'string' || ids.has(r.id))
+            return fail(`${where}: "id" must be text different from every earlier record.`);
+        ids.add(r.id);
+
+        for (const [field, rule] of Object.entries(rules)) {
+            if (typeof r[field] !== (field === 'amount' ? 'number' : 'string'))
+                return fail(`${where}: "${field}" has the wrong type, amount must be a number, the other text`);
+            const result = rule(String(r[field]));
+            if (!result.valid)
+                return fail(`${where}: "${field} is not valid. ${result.message}`);
+        }
+        for (const field of ['createAt', 'updateAt']) {
+            if (typeof r[field] !== 'string' || Number.isNaN(Date.parse(r[field])))
+                return fail(`${where}: "${field}" must be a date and time`)
+        }
+    }
+
+    //keep only the seven known fields
+    return { valid: true, message: '', records: data.map((r) => Object.fromEntries(fields.map ((f) => [f, r[f]])))};
+
+}
+
+//the regex compiler for the search box
+export function tryCompile(input, flags = 'i') {
+    if (!input) return { re: null, error: ''};
+    try {
+        return { re: new RegExp(input, flags), error: '' };
+    } catch (err) {
+        return { re: null, error: err.message};
+    }
 }
