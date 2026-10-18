@@ -1,9 +1,9 @@
 # AOuii Pocket Assistant
 
-A personal finance tracker for students, built with plain HTML, CSS and JavaScript (no frameworks).
+A personal finance tracker for students, built with plain HTML, CSS and JavaScript (no frameworks). Import and Export features not yet done.
 
 - **Theme:** Student Finance Tracker
-- **Live site (GitHub Pages):** `TODO: paste your Pages URL here`
+- **Live site (GitHub Pages):** `https://bigiraneza-car.github.io/my_finance_tracker_bigiraneza-car/
 - **Demo video (unlisted):** `TODO: paste your video link here`
 - **Contact:** [github.com/bigiraneza-car](https://github.com/bigiraneza-car) · b.igiraneza@alustudent.com
 
