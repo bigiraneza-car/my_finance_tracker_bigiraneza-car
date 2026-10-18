@@ -1,91 +1,59 @@
-const KEY = 'aouii:records';
+const KEYS = {records:'aouii:records', cap:'aouii:cap', rates: 'aouii:rates', categories: 'aouii:categories' };
+//category list
+export const DEFAULT_CATEGORIES = ['Food', 'Books', 'Transport', 'Entertainment', 'Fees', 'Other'];
 
 //to let main.js decide how a failed save is shown
 
-let saveErrorHandler = null;
-export function onSaveError(fn) {saveErrorHandler = fn; }
- //wrap setItem in try/catch
-function safeSet(Key, text) {
+let onError = () => {};
+export const onSaveError = (fn) => { onError = fn; };
+ //one reader and writer with its own try/catch
+function read(Key, fallback) {
     try {
-        localStorage.setItem(Key, text);
-        return true;
-    } catch (error) {
-        console.error('Could not save to localStorage:', error);
-        if (saveErrorHandler) saveErrorHandler(error);
-        return false;
+        const text = localStorage.getItem(Key);
+        return text === null ? fallback : JSON.parse(text);
+    } catch {
+        return fallback;
     }
 }
-// change list into text and save it 
-export function save(records) {
-    return safeSet(KEY, JSON.stringify(records));
+
+function write(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+    }catch (error) {
+        onError(error);
+    }
 }
+
+
 // This function will load back the saved records  
 export function load() {
-    const text = localStorage.getItem(KEY);
-    if (text === null)  //if nothing is saved yet, return null
-        return null;
-
-    try {
-        const data = JSON.parse(text);
-        return Array.isArray(data) ? data : null;
-
-    } catch {
-        return null;    //catch damaged text to avoid crashing the app
-    }
+    const data = read(KEYS.records, null);
+        return ArrayisArray(data) ? data : null;
 }
+// change list into text and save it 
+export const  save = (records) => write(KEYS.records, records);
 
-//cap saved under its own key separate from the records
-const CAP_KEY = 'aouii:cap';
 
-//cap is a number or null
-export function saveCap(cap) {
-    if(cap === null) localStorage.removeItem(CAP_KEY);
-    else safeSet(CAP_KEY, String(cap));
-}
 
 //return a number or null if there is no cap
-export function loadCap() {
-    const text = localStorage.getItem(CAP_KEY);
-    if ( text === null) return null;
-    const value = Number(text);
-    return Number.isFinite(value) && (value >= 0) ? value : null;
-}
+export const loadCap = () => {
+    const value = read(KEYS.cap, null);
+    return typeof value === 'number' ? value : null;
+};
+export const saveCap = (cap) => write(KEYS.cap, cap);
 
-// exchange rates
-const RATES_KEY = 'aouii:rates';
-
-export function saveRates(rates) {
-    return safeSet(RATES_KEY, JSON.stringify(rates));
-}
+// exchange rates RWF and KES
 
 export function loadRates() {
-    const empty = { RWF: null, KES: null };
-    try {
-        const data = JSON.parse(localStorage.getItem(RATES_KEY) ?? 'null');
-        if (!data || typeof data !== 'object') return empty;
-        const clean = (v) => (typeof v === 'number' && v > 0 ? v : null);
-        return { RWF:clean(data.RWF), KES:clean(data.KES) };
-    } catch {
-        return empty;
-    }
+    const data = read(KEYS.rates, null);
+    return {RWF: data?.RWF > 0 ? DEFAULT_CATEGORIES.RWF : null, KES: data?.KES > 0 ? data.KES : null };
 }
+
+export const saveRates = (rates) => write(KEYS.rates, rates);
 
 //add: category list
-const CATEGORIES_KEY = 'aouii:categories';
-export const DEFAULT_CATEGORIES = ['Food', 'Books', 'Transport', 'Entertainment', 'Fees', 'Other'];
-
-export function saveCategories(categories) {
-    return safeSet(CATEGORIES_KEY, JSON.stringify(categories));
-}
-
-//falls back to defaults if nothing is saved or if the saved value is damaged
 export function loadCategories() {
-    try {
-        const data = JSON.parse(localStorage.getItem(CATEGORIES_KEY) ?? 'null');
-        if (Array.isArray(data) && data.length > 0 && data.every((c) => typeof c === 'string')) 
-            return data;
-    }catch {
-        //fall through to the defaults
-    }
-    return [...DEFAULT_CATEGORIES];
+        const data = read(KEYS.categories, null);
+        return Array.isArray(data) && data.length > 0 ? data : [...DEFAULT_CATEGORIES];
 }
+export const saveCategories = (categories) => write(KEYS.categories, categories);

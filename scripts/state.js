@@ -48,8 +48,7 @@ export const getAllRecords = () => records.map((r) => ({...r }));
 //makes id for record with the format rec_0001
 function makeId() {
     const numbers = records.map((r) => parseInt(String(r.id).replace('rec_', ''), 10) || 0);
-    const highest = Math.max(0, ...numbers);
-    return `rec_${String(highest + 1).padStart(4, '0')}`;
+    return `rec_${String(Math.max(0, ...numbers) + 1).padStart(4, '0')}`;
 }
 
 //add record 
@@ -77,7 +76,6 @@ export function updateRecord(id, changes) {
     for (const field of editableFields) {
         if (field in changes) {
             record[field] = field === 'amount' ? Number(changes[field]) : changes[field];
-
         }
     }
 
@@ -88,9 +86,43 @@ export function updateRecord(id, changes) {
 
 // delete and build a new list without that id
 export function deleteRecord(id) {
-    const before = records.length;
     records = records.filter((r) => r.id !== id);
     save(records);
-    return records.length < before; //true if something was really remove
 }
 
+//used by the import to replace the whole list
+export function replaceAllRecords(newRecords) {
+    records = [...newRecords];
+    save(records);
+}
+//sorting for the records table
+const sorters = {
+    'date-desc': (a, b) => b.date.localeCompare(a.date),
+    'date-asc': (a, b) => a.date.localeCompare(b.date),
+    'description-asc': (a, b) => a.description.localeCompare(b.description, undefined, {sensitivity: 'base'}),
+    'description-desc': (a, b) => b.description.localeCompare(a.description, undefined, {sensitivity: 'base'}),
+    'amount-asc': (a, b) => a.amount - b.amount,
+    'amount-desc': (a, b) => b.amount - a.amount,
+};
+
+export const sortRecords = (list, key) => [...list].sort(sorters[key]);
+
+// categories and exchange rate
+export const getCategories = () => [...categories];
+export const hasCategory = (name) => categories.some((c) => c.toLowerCase() ===  name.toLowerCase());
+
+export function addCategory(name) {
+    if (hasCategory(name))
+        return;
+    categories.push(name);
+    saveCategories(categories);
+}
+export const addMissingCategories = (list) => list.forEach((r) => addCategory(r.category)); //after an import
+
+export const getRates = () => ({...rates});
+export function setRates(newRates) {
+    rates = newRates;
+    saveRates(rates);
+}
+
+//movfrom stats.js

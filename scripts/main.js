@@ -5,13 +5,15 @@ import {
     validateAmount,
     validateCategory,
     validateDate,
+    validateImport,
+    tryCompile,
 } from './validator.js';
 
-import { initState, addRecord, getAllRecords } from './state.js';
+import { initState, addRecord, getAllRecords, updateRecord, deleteRecord, replaceAllRecords, sortRecords, getCategories, hasCategory, addCategory, addMissingCategories, getRates, setRates, } from './state.js';
 
-import {loadCap, saveCap } from './storage.js';
-import { lastSevenDays, weeklySpent, capStatus } from './stats.js';
-import { renderStats, renderCapMessage, announce} from './ui.js';
+import {loadCap, saveCap, onSaveError } from './storage.js';
+import { lastSevenDays, weeklySpent, capStatus, dateKey } from './stats.js';
+import { renderStats, renderCapMessage, announce, renderTable, renderCategories, formatAmount} from './ui.js';
 
  // error UI helpers 
 function showError(fieldId, message) {
@@ -65,7 +67,8 @@ function setupForm({ form, fields, statusId, successMessage, onValid }) {
     });
 
 }
-
+// show a message when saving failed
+onSaveError(() => announce($('save-error'), 'Could not save you Data'));
 //start the app: load the save records
 await initState();
 // the weekly cap: a number
@@ -83,7 +86,7 @@ function refreshAll(shouldAnnounce = true) {
     renderCapMessage(capStatus(cap, weeklySpent(days)), cap, shouldAnnounce);
     //
 }
-refreshAll(false);
+refreshAll(records, days, getRates());
 
 //update the cap when the user leaves the field or presses Enter
 limitInput.addEventListener('change', () => {
